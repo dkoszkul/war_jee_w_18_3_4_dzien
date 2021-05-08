@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Book;
 import pl.coderslab.repository.BookRepository;
 
@@ -26,8 +27,13 @@ public class BookController {
 //        List<Book> result = bookRepository.findAll();
 //        result.forEach(book -> LOGGER.info(book + ""));
 
-        List<Book> result = bookRepository.findByTitle("Title 1981830572");
-        LOGGER.info(result.size() + "");
+//        List<Book> result = bookRepository.findByTitle("Title 1981830572");
+//        LOGGER.info(result.size() + "");
+
+        Author author = new Author();
+        author.setId(1L);
+        List<Book> byAuthorsContaining = bookRepository.findByAuthorsContaining(author);
+        byAuthorsContaining.forEach(book -> LOGGER.info(book + ""));
         return "ok";
     }
 }
